@@ -16,20 +16,48 @@
  */
  
 ;(function() {
+	// Create Temp SLIDE
+	var slideContent ='<div class="slides">';
+	slideContent += '<section>';
+	slideContent += 'Slide NUMBER 1';
+	slideContent += '</section>';
+	slideContent += '<section>';
+	slideContent += 'Slide NUMBER 2';
+	slideContent += '</section>';	
+	slideContent += '<section>';
+	slideContent += 'Slide NUMBER 4';
+	slideContent += '</section>';	
+	slideContent += '<section>';
+	slideContent += 'Slide NUMBER 5';
+	slideContent += '</section>';	
+	slideContent += '</div>';
+	var slideInfo = {
+		slideId : 'slide_1',
+		content: slideContent,
+		state: {indexh: 1, indexv: 0, paused: false, overview: false},
+	};
 	
-	function broadcast(socket, request, data) {
-		if(typeof socket.broadcast === 'undefined'){
-			socket.emit(request, data);				
-			return true;
-		} else {
-			socket.broadcast.emit(request, data);		
-			return true;			
-		}
-		return false;
-	}	
+	function getSlide(slideId) {
+		//Todo: Get Slide from database
+		return slideInfo;
+	}
+	
+	function updateSlide(id, data) {		
+		slideInfo = data;		
+		//Todo: Update Slide to database			
+	}
+	
+	function deleteSlide(slideId) {		
+		// slideInfo.content = slide.content;
+		// slideInfo.state = slide.state;
+		
+		//Todo: Delete Slide to database	
+		
+	}
 		
 	// public
 	module.exports = {
-		broadcast,
+		getSlide,
+		updateSlide,
 	};
 })();

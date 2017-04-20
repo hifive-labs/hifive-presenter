@@ -63,7 +63,13 @@
 	var slideCtrl = require('./server/slide/slide.controller.js');
 	slidesIO.on('connection', function(socket) {
 		console.log('io connected to slides');
-
+		var slide = slideCtrl.getSlide('slide_01');
+		var messageData = {
+			slideData : slide,
+			secret : ''
+		}
+		socket.emit('init', messageData);
+		
 		socket.on('disconnect', function(socket) {
 			console.log('io disconnected out slides');
 		});
@@ -73,8 +79,18 @@
 			// if (typeof data.secret == 'undefined' || data.secret == null || data.secret === '') return;
 			// if (createHash(data.secret) === data.socketId) {
 				data.secret = null;
-				// socket.broadcast.emit(data.socketId, data);
-				slideCtrl.broadcast(socket, 'slidestatechanged', data);
+				socket.broadcast.emit('slidestatechanged', data);		
+			// };
+		});
+		
+		// slideの操作		
+		socket.on('slidecontentchanged', function(data) {
+			// if (typeof data.secret == 'undefined' || data.secret == null || data.secret === '') return;
+			// if (createHash(data.secret) === data.socketId) {
+				data.secret = null;
+				slideCtrl.updateSlide('slide_01', data.slide);
+				// todo: Verify Update is correct				
+				socket.broadcast.emit('slidecontentchanged', data);
 			// };
 		});		
 	});
