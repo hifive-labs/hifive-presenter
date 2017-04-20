@@ -23,25 +23,27 @@
 </head>
 <body>
     <div id="presentator">
-        <input type="button" id="btnGet" value="Get Slide">
-        <input type="button" id="btnGetCur" value="Get Current">
-        <input type="button" id="btnAdd" value="Add Slide">
-        <input type="button" id="btnRemove" value="Remove Slide">
-        <input type="text" id="txtPageNum" value = "1">
-        <input type="button" id="btnGoTo" value="Go To Slide">
+        <input type="checkbox" id="chkSync" name="syndata" value="1" checked="checked"><span style="color:white;">同期</span>
+        <input type="button" id="btnGet" value="内容取得">
+        <input type="button" id="btnGetCur" value="現在内容取得">
+        <input type="button" id="btnAdd" value="追加">
+        <input type="button" id="btnRemove" value="削除">
+        <input type="text" id="txtPageNum" value = "1" style="width:50px;">
+        <input type="button" id="btnGoTo" value="移動">
     </div>
 
     <div style="width:100%;height:90%">
         <div class="reveal">
             <div class="slides">
+            	<!--
                 <section>Slide 1</section>
-                <section data-state="statechange">
+                <section>
                     <section>Slide 2.A</section>
                     <section>Slide 2.B</section>
                     <section>Slide 2.C</section>
                 </section>
-                <section data-state="statechange">Slide 3</section>
-                <section data-state="statechange">
+                <section>Slide 3</section>
+                <section>
                     <section>Slide 4.1</section>
                     <section>Slide 4.2</section>
                 </section>
@@ -102,6 +104,7 @@
                     data-vertical="\n--\n">
                     <script type="text/template"></script>
                 </section>
+                -->
 
                 <script src="reveal/lib/js/head.min.js"></script>
                 <script src="reveal/js/reveal.js"></script>

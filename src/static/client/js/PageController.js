@@ -29,8 +29,23 @@ $(function() {
 		__ready: function() {},
 
 		__init: function() {
+			socket.on('initdata', function(data) {
+				presentationController.insertSlidesByHTMLString(data.slideData.content);
+				presentationController.setState(data.slideData.state);
+			});
+
 			socket.on('slidestatechanged', function(data) {
-				presentationController.setState(data.state);
+				var isSync = $("#chkSync").is(":checked");
+				if (isSync) {
+					presentationController.setState(data.slideData.state);
+				}
+			});
+
+			socket.on('slidecontentchanged', function(data) {
+				var isSync = $("#chkSync").is(":checked");
+				if (isSync) {
+					presentationController.insertSlidesByHTMLString(data.slideData.content);
+				}
 			});
 
 			presentationController.rootElement.addEventListener('slidechanged', this._postInfo);
@@ -44,11 +59,16 @@ $(function() {
 
 		_postInfo: function() {
 			var messageData = {
-				state: presentationController.getState(),
+				slideData : {
+					state: presentationController.getState(),					
+				},
 				secret: null,
 				socketId: null
 			};
-			socket.emit('slidestatechanged', messageData);
+			var isSync = $("#chkSync").is(":checked");
+			if (isSync) {
+				socket.emit('slidestatechanged', messageData);
+			}
 		},
 
 		//テスト用 - Start
@@ -70,17 +90,32 @@ $(function() {
 			};
 			presentationController.insertSlidesAfter(maskdown, options, 1)
 			presentationController.appendSlides(maskdown2, options);
+
+			var messageData = {
+				"slideData": {
+					"content": presentationController.getContentOfSlides(0),
+					"state": 0
+				}
+			};
+			socket.emit('slidecontentchanged', messageData);
 		},
 
 		"#btnRemove click": function() {
 			presentationController.removeSlideByIndex(0);
+			var messageData = {
+				"slideData": {
+					"content": presentationController.getContentOfSlides(0),
+					"state": 0
+				}
+			};
+			socket.emit('slidecontentchanged', messageData);
 		},
 
 		"#btnGoTo click": function() {
 			var num = $("#txtPageNum").val();
 			presentationController.goToSlide(num);
 		},
-		//テスト用 - End
+	//テスト用 - End
 	}
 
 	h5.core.controller('body', pageController);

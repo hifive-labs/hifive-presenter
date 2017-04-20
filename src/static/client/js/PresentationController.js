@@ -231,6 +231,19 @@
 		},
 
 		/**
+		 *
+		 *
+		 */
+		 insertSlidesByHTMLString: function(htmlString) {
+			var slidesNode = $(this.rootElement).find('.slides');
+			slidesNode.empty();
+			slidesNode.append(htmlString);
+			RevealMarkdown.convertSlides();
+			this.curReveal.sync();
+			this.curReveal.slide(0);
+		},
+
+		/**
 		 * インデックス指定したスライドを削除する。
 		 *
 		 * @params index(インデックス)

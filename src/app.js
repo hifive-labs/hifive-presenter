@@ -23,13 +23,13 @@
 	var bodyParser = require('body-parser');
 	var server = require('http').Server(app);
 	var io = require('socket.io')(server);
-	
+
 	// for parsing application/json
-	app.use(bodyParser.json()); 
-	
+	app.use(bodyParser.json());
+
 	// for parsing application/x-www-form-urlencoded
-	app.use(bodyParser.urlencoded({ extended: true })); 
-	
+	app.use(bodyParser.urlencoded({ extended: true }));
+
 	/**
 	 * Socket.Io init
 	 */
@@ -40,7 +40,7 @@
 			 console.log('io disconnected!');
 		});
 	});
-		
+
 	/**
 	 * Load Client
 	 */
@@ -49,35 +49,38 @@
 	});
 	app.use(express.static('static/client'));
 	app.use(express.static('static/vendor'));
-		
+
 	/**
 	 * Slide socket
-	 */	
+	 */
 	var slidesIO = io.of('/slides');
 	// make io accessible for all routes in namespace /slides
   app.use(config.apiRoute.concat('slides/'), function(req,res,next){
     req.io = slidesIO;
     next();
   });
-	
+
 	var slideCtrl = require('./server/slide/slide.controller.js');
 	slidesIO.on('connection', function(socket) {
 		console.log('io connected to slides');
+		
+		// Get Init Slide
 		var slide = slideCtrl.getSlide('slide_01');
 		var messageData = {
 			slideData : slide,
 			secret : ''
 		}
-		socket.emit('init', messageData);
-		
+		socket.emit('initdata', messageData);
 		socket.on('disconnect', function(socket) {
 			console.log('io disconnected out slides');
 		});
-		
-		// slideの操作		
+
+		// slideの操作
 		socket.on('slidestatechanged', function(data) {
 			// if (typeof data.secret == 'undefined' || data.secret == null || data.secret === '') return;
 			// if (createHash(data.secret) === data.socketId) {
+				console.log("slidestatechanged");
+				console.log(data);
 				data.secret = null;
 				socket.broadcast.emit('slidestatechanged', data);		
 			// };
@@ -88,13 +91,13 @@
 			// if (typeof data.secret == 'undefined' || data.secret == null || data.secret === '') return;
 			// if (createHash(data.secret) === data.socketId) {
 				data.secret = null;
-				slideCtrl.updateSlide('slide_01', data.slide);
+				slideCtrl.updateSlide('slide_01', data.slideData);
 				// todo: Verify Update is correct				
 				socket.broadcast.emit('slidecontentchanged', data);
 			// };
-		});		
+		});
 	});
-	
+
 	/**
 	 * Router
 	 */
@@ -111,6 +114,6 @@
 			console.log(`Express server listening on port ${port} in ${app.settings.env} mode`);
 		});
 	}
-	
+
 	module.exports = app;
 })();
