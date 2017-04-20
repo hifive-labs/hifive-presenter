@@ -1,0 +1,115 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+
+    <!-- jqueryの読み込み -->
+    <script type="text/javascript" src="jquery/jquery-2.min.js"></script>
+
+    <!-- h5の読み込み -->
+    <link rel="stylesheet" href="h5/h5.css">
+    <script type="text/javascript" src="h5/ejs-h5mod.js"></script>
+    <script type="text/javascript" src="h5/h5.dev.js"></script>
+
+    <!-- revealのCSSの読み込み -->
+    <link rel="stylesheet" href="reveal/css/reveal.css">
+    <link rel="stylesheet" href="reveal/css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+
+    <!-- SocketIOの読み込み -->
+    <script src="/socket.io/socket.io.js"></script>
+
+</head>
+<body>
+    <div id="presentator">
+        <input type="button" id="btnGet" value="Get Slide">
+        <input type="button" id="btnGetCur" value="Get Current">
+        <input type="button" id="btnAdd" value="Add Slide">
+        <input type="button" id="btnRemove" value="Remove Slide">
+        <input type="text" id="txtPageNum" value = "1">
+        <input type="button" id="btnGoTo" value="Go To Slide">
+    </div>
+
+    <div style="width:100%;height:90%">
+        <div class="reveal">
+            <div class="slides">
+                <section>Slide 1</section>
+                <section data-state="statechange">
+                    <section>Slide 2.A</section>
+                    <section>Slide 2.B</section>
+                    <section>Slide 2.C</section>
+                </section>
+                <section data-state="statechange">Slide 3</section>
+                <section data-state="statechange">
+                    <section>Slide 4.1</section>
+                    <section>Slide 4.2</section>
+                </section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Markdown support
+                        Instructions in the [readme](https://github.com/hakimel/reveal.js#markdown).
+
+                        ```
+                        <section data-markdown>
+                          ## Markdown INSIDE
+                          Nested Markdown [readme2](https://github.com/hakimel/reveal.js).
+                        </section>
+                        ```
+                        ---
+                        ## Markdown support2
+                        Instructions2
+                    </script>
+                </section>
+
+                <section>
+                    <section id="fragments">
+                        <h2>Fragments</h2>
+                        <p>Hit the next arrow...</p>
+                        <p class="fragment">... to step through ...</p>
+                        <p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
+
+                        <aside class="notes">
+                            This slide has fragments which are also stepped through in the notes window.
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Fragment Styles</h2>
+                        <p>There's different types of fragments, like:</p>
+                        <p class="fragment grow">grow</p>
+                        <p class="fragment shrink">shrink</p>
+                        <p class="fragment fade-out">fade-out</p>
+                        <p class="fragment current-visible">current-visible</p>
+                        <p>Highlight
+                            <span class="fragment highlight-red">red</span>
+                            <span class="fragment highlight-blue">blue</span>
+                            <span class="fragment highlight-green">green</span>
+                        </p>
+                    </section>
+                </section>
+
+                <section data-transition="slide">
+                    The train goes on …
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    and stops.
+                </section>
+
+                <section data-markdown="./mdfile/example.md"
+                    data-separator="\n---\n$"
+                    data-vertical="\n--\n">
+                    <script type="text/template"></script>
+                </section>
+
+                <script src="reveal/lib/js/head.min.js"></script>
+                <script src="reveal/js/reveal.js"></script>
+
+                <script type="text/javascript" src="js/PresentationController.js"></script>
+                <script type="text/javascript" src="js/PageController.js"></script>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
