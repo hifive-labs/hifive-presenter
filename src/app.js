@@ -23,13 +23,13 @@
 	var bodyParser = require('body-parser');
 	var server = require('http').Server(app);
 	var io = require('socket.io')(server);
-	
+
 	// for parsing application/json
-	app.use(bodyParser.json()); 
-	
+	app.use(bodyParser.json());
+
 	// for parsing application/x-www-form-urlencoded
-	app.use(bodyParser.urlencoded({ extended: true })); 
-	
+	app.use(bodyParser.urlencoded({ extended: true }));
+
 	/**
 	 * Socket.Io init
 	 */
@@ -40,7 +40,7 @@
 			 console.log('io disconnected!');
 		});
 	});
-		
+
 	/**
 	 * Load Client
 	 */
@@ -49,36 +49,57 @@
 	});
 	app.use(express.static('static/client'));
 	app.use(express.static('static/vendor'));
-		
+
 	/**
 	 * Slide socket
-	 */	
+	 */
 	var slidesIO = io.of('/slides');
 	// make io accessible for all routes in namespace /slides
   app.use(config.apiRoute.concat('slides/'), function(req,res,next){
     req.io = slidesIO;
     next();
   });
-	
+
+  	var dataServer = {"htmlContent":'<section>Slide 1</section><section><section>Slide 2.A</section><section>Slide 2.B</section><section>Slide 2.C</section></section>' +
+  			'<section>Slide 3</section><section><section>Slide 4.1</section><section>Slide 4.2</section></section>' +
+  			'<section><section id="fragments"><h2>Fragments</h2><p>Hit the next arrow...</p><p class="fragment">... to step through ...</p>' +
+  			'<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>' +
+  			'<aside class="notes">This slide has fragments which are also stepped through in the notes window.</aside></section>' +
+  			'<section><h2>Fragment Styles</h2><p>Theres different types of fragments, like:</p><p class="fragment grow">grow</p>' +
+  			'<p class="fragment shrink">shrink</p><p class="fragment fade-out">fade-out</p><p class="fragment current-visible">current-visible</p>' +
+  			'<p>Highlight<span class="fragment highlight-red">red</span><span class="fragment highlight-blue">blue</span><span class="fragment highlight-green">green</span></p></section></section>',
+  			"state":0};
+
 	var slideCtrl = require('./server/slide/slide.controller.js');
 	slidesIO.on('connection', function(socket) {
 		console.log('io connected to slides');
 
+		socket.emit("initdata", dataServer);
+
 		socket.on('disconnect', function(socket) {
 			console.log('io disconnected out slides');
 		});
-		
-		// slideの操作		
+
+		// slideの操作
 		socket.on('slidestatechanged', function(data) {
 			// if (typeof data.secret == 'undefined' || data.secret == null || data.secret === '') return;
 			// if (createHash(data.secret) === data.socketId) {
 				data.secret = null;
 				// socket.broadcast.emit(data.socketId, data);
+				dataServer.state = data.state;
 				slideCtrl.broadcast(socket, 'slidestatechanged', data);
+
 			// };
-		});		
+		});
+
+		// slideの操作
+		socket.on('slidecontentchanged', function(data) {
+			dataServer.htmlContent = data.htmlContent;
+			slideCtrl.broadcast(socket, 'slidecontentchanged', data);
+
+		});
 	});
-	
+
 	/**
 	 * Router
 	 */
@@ -95,6 +116,6 @@
 			console.log(`Express server listening on port ${port} in ${app.settings.env} mode`);
 		});
 	}
-	
+
 	module.exports = app;
 })();
