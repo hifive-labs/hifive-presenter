@@ -62,18 +62,19 @@
 
 	var slideCtrl = require('./server/slide/slide.controller.js');
 	slidesIO.on('connection', function(socket) {
-		console.log('io connected to slides');
-		
-		// Get Init Slide
-		var slide = slideCtrl.getSlide('slide_01');
-		var messageData = {
-			slideData : slide,
-			secret : ''
-		}
-		socket.emit('initdata', messageData);
+		console.log('io connected to slides');		
 		socket.on('disconnect', function(socket) {
 			console.log('io disconnected out slides');
 		});
+		
+		// Get Init Data
+		var slide = slideCtrl.getSlide('slide_01');
+		var initData = {
+			slideData : slide,
+			socketId : socket.id,
+			secret : ''
+		}
+		socket.emit('initdata', initData);
 
 		// slideの操作
 		socket.on('slidestatechanged', function(data) {
@@ -81,7 +82,7 @@
 			// if (createHash(data.secret) === data.socketId) {
 				data.secret = null;
 				slideCtrl.updateState('slide_01', data.slideData.state);
-				socket.broadcast.emit('slidestatechanged', data);		
+				socket.broadcast.emit('slidestatechanged', data);
 			// };
 		});
 		
@@ -98,14 +99,11 @@
 		socket.on('syncdata', function(data) {
 			// if (typeof data.secret == 'undefined' || data.secret == null || data.secret === '') return;
 			// if (createHash(data.secret) === data.socketId) {
-				
-				// todo: Verify Update is correct				
-				data.secret = null;
-				var syncData = {
-					slideData : slideCtrl.getSlide('slide_01'),
-					secret : ''
+				// todo: Verify Update is correct
+				if(data.socketId == socket.id){
+					data.slideData = slideCtrl.getSlide('slide_01');
 				}
-				socket.emit('syncdata', syncData);
+				socket.emit('syncdata', data);
 			// };
 		});
 	});

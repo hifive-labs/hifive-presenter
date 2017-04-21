@@ -22,91 +22,86 @@
 
 	var socketURL = 'http://localhost:3000';
 
-	var ioOptions = { 
-      transports: ['websocket']
-    , forceNew: true
-    , reconnection: false
-  };
+	var ioOptions = {
+  transports: ['websocket'],
+  'force new connection': true
+};
 	var sender, receiver;
 	describe('SOCKET CONNECT', function(){
+		var senderId = '';
+		var receiverId = '';
+		var messageData = null;
 		beforeEach(function(done){			
 			// connect two io clients
 			sender = io(socketURL + '/slides', ioOptions)
-			receiver = io(socketURL + '/slides', ioOptions)
-			
-			// finish beforeEach setup
-			done()
+			sender.on('initdata', function(data){
+				senderId = data.socketId;
+				messageData = data;
+				done()
+			})
 		})
-		afterEach(function(done){
-			
+		beforeEach(function(done){			
+			receiver = io(socketURL + '/slides', ioOptions)
+			receiver.on('initdata', function(data){
+				receiverId = data.socketId;
+				done()
+			})
+		})
+		afterEach(function(done){			
 			// disconnect io clients after each test
 			sender.disconnect()
 			receiver.disconnect()
 			done()
 		})
-		
-		describe('Message Events', function(){			
-			it(' - slidestatechanged event is emited.', function(done){
-				var messageData = {
+		describe('Message Events', function(){
+			it(' - state changed event is emited.', function(done){
+				messageData = {
 					slideData : {
 						state: {indexh: 4, indexv: 0, paused: false, overview: false},					
 					},
 					secret: null,
-					socketId: null
+					socketId: senderId
 				};
 				sender.emit('slidestatechanged', messageData)
-				receiver.on('slidestatechanged', function(msg){
-					assert.deepEqual(msg, messageData);
+				receiver.on('slidestatechanged', function(data){
+					assert.deepEqual(data, messageData);
 					done()
 				})
 			})
 			
-			it(' - slidecontentchanged event is emited.', function(done){				
+			it(' - content changed event is emited.', function(done){				
 				var slideContent ='<section>TEST 1</section><section><section>TEST 2.A</section><section>TEST 2.B</section><section>TEST 2.C</section></section>';
-				var messageData = {
+				messageData = {
 					slideData : {
 						content: slideContent,
 						state: {indexh: 4, indexv: 0, paused: false, overview: false},					
 					},
 					secret: null,
-					socketId: null
+					socketId: senderId
 				};
-				sender.emit('slidestatechanged', messageData)
-				receiver.on('slidestatechanged', function(msg){
-					assert.deepEqual(msg, messageData);
+				sender.emit('slidecontentchanged', messageData)
+				receiver.on('slidecontentchanged', function(data){
+					assert.deepEqual(data, messageData);
 					done()
 				})
 			})
 			
+			it(' - syncdata event is emited.', function(done){				
+				sender.emit('syncdata', {
+					socketId : senderId,
+					secret : ''
+				});
+				// receiver.on('syncdata', function(data){
+					// throw("error");
+					// done()
+				// })
+				sender.on('syncdata', function(data){
+					assert.deepEqual(data, messageData);
+					done()
+				})
+			})		
 		})
 	});
-	
-	describe('SYNC DATA', function(){			
-		it(' - sync data event is emited.', function(done){		
-			// connect two io clients
-			sender = io(socketURL + '/slides', ioOptions)
-			receiver = io(socketURL + '/slides', ioOptions)
-			
-			var initData = null;
-			sender.on('initdata', function(msg){
-				initData = msg;
-			})
-			sender.emit('syncdata', {})
-			receiver.on('syncdata', function(msg){
-				assert.throws(() => {
-						throw new Error('Wrong value');
-					},
-					Error
-				);
-			})
-			sender.on('syncdata', function(msg){
-				assert.deepEqual(msg, initData);
-			})
-			sender.disconnect()
-			receiver.disconnect()
-			done()
-		})
-	})
 	
 	describe('Slide Controller', function(){
 		it(' - slidecontentchanged check.', function(done){
@@ -119,6 +114,7 @@
 			slideCtrl.updateSlide('slide_1', slideData);
 			var slide = slideCtrl.getSlide('slide_1');
 			assert.deepEqual(slide, slideData);
+			done()
 		})
 	})
 })();
