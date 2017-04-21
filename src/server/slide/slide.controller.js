@@ -16,6 +16,7 @@
  */
  
 ;(function() {
+	'use strict'
 	// Create Temp SLIDE
 	var slideContent ='<section>Slide 1</section><section><section>Slide 2.A</section><section>Slide 2.B</section><section>Slide 2.C</section></section>' +
   			'<section>Slide 3</section><section><section>Slide 4.1</section><section>Slide 4.2</section></section>' +
@@ -30,20 +31,24 @@
 		content: slideContent,
 		state: {indexh: 0, indexv: 0, paused: false, overview: false},
 	};
-	
 	function getSlide(slideId) {
 		//Todo: Get Slide from database
 		return slideData;
 	}
 	
-	function updateSlide(id, data) {		
-		slideInfo = data;		
+	function updateState(id, state) {
+		slideData.state = state;
+		//Todo: Update Slide to database			
+	}
+	
+	function updateSlide(id, data) {
+		slideData = data;
 		//Todo: Update Slide to database			
 	}
 	
 	function deleteSlide(slideId) {		
-		// slideInfo.content = slide.content;
-		// slideInfo.state = slide.state;
+		// slideData.content = slide.content;
+		// slideData.state = slide.state;
 		
 		//Todo: Delete Slide to database	
 		
@@ -53,5 +58,6 @@
 	module.exports = {
 		getSlide,
 		updateSlide,
+		updateState,
 	};
 })();

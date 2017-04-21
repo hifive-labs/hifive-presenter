@@ -79,14 +79,12 @@
 		socket.on('slidestatechanged', function(data) {
 			// if (typeof data.secret == 'undefined' || data.secret == null || data.secret === '') return;
 			// if (createHash(data.secret) === data.socketId) {
-				console.log("slidestatechanged");
-				console.log(data);
 				data.secret = null;
+				slideCtrl.updateState('slide_01', data.slideData.state);
 				socket.broadcast.emit('slidestatechanged', data);		
 			// };
 		});
 		
-		// slideの操作		
 		socket.on('slidecontentchanged', function(data) {
 			// if (typeof data.secret == 'undefined' || data.secret == null || data.secret === '') return;
 			// if (createHash(data.secret) === data.socketId) {
