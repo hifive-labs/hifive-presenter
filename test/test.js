@@ -28,7 +28,7 @@
     , reconnection: false
   };
 	var sender, receiver;
-	describe('Slide Controller', function(){
+	describe('SOCKET CONNECT', function(){
 		beforeEach(function(done){			
 			// connect two io clients
 			sender = io(socketURL + '/slides', ioOptions)
@@ -45,7 +45,7 @@
 			done()
 		})
 		
-		describe('Message Events', function(){
+		describe('Message Events', function(){			
 			it(' - slidestatechanged event is emited.', function(done){
 				var messageData = {
 					slideData : {
@@ -60,6 +60,65 @@
 					done()
 				})
 			})
+			
+			it(' - slidecontentchanged event is emited.', function(done){				
+				var slideContent ='<section>TEST 1</section><section><section>TEST 2.A</section><section>TEST 2.B</section><section>TEST 2.C</section></section>';
+				var messageData = {
+					slideData : {
+						content: slideContent,
+						state: {indexh: 4, indexv: 0, paused: false, overview: false},					
+					},
+					secret: null,
+					socketId: null
+				};
+				sender.emit('slidestatechanged', messageData)
+				receiver.on('slidestatechanged', function(msg){
+					assert.deepEqual(msg, messageData);
+					done()
+				})
+			})
+			
 		})
 	});
+	
+	describe('SYNC DATA', function(){			
+		it(' - sync data event is emited.', function(done){		
+			// connect two io clients
+			sender = io(socketURL + '/slides', ioOptions)
+			receiver = io(socketURL + '/slides', ioOptions)
+			
+			var initData = null;
+			sender.on('initdata', function(msg){
+				initData = msg;
+			})
+			sender.emit('syncdata', {})
+			receiver.on('syncdata', function(msg){
+				assert.throws(() => {
+						throw new Error('Wrong value');
+					},
+					Error
+				);
+			})
+			sender.on('syncdata', function(msg){
+				assert.deepEqual(msg, initData);
+			})
+			sender.disconnect()
+			receiver.disconnect()
+			done()
+		})
+	})
+	
+	describe('Slide Controller', function(){
+		it(' - slidecontentchanged check.', function(done){
+			var slideCtrl = require('../src/server/slide/slide.controller.js');
+			var slideContent ='<section>TEST 1</section><section><section>TEST 2.A</section><section>TEST 2.B</section><section>TEST 2.C</section></section>';
+			var slideData = {
+				content: slideContent,
+				state: {indexh: 4, indexv: 0, paused: false, overview: false},					
+			};
+			slideCtrl.updateSlide('slide_1', slideData);
+			var slide = slideCtrl.getSlide('slide_1');
+			assert.deepEqual(slide, slideData);
+		})
+	})
 })();

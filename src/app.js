@@ -94,6 +94,20 @@
 				socket.broadcast.emit('slidecontentchanged', data);
 			// };
 		});
+		
+		socket.on('syncdata', function(data) {
+			// if (typeof data.secret == 'undefined' || data.secret == null || data.secret === '') return;
+			// if (createHash(data.secret) === data.socketId) {
+				
+				// todo: Verify Update is correct				
+				data.secret = null;
+				var syncData = {
+					slideData : slideCtrl.getSlide('slide_01'),
+					secret : ''
+				}
+				socket.emit('syncdata', syncData);
+			// };
+		});
 	});
 
 	/**

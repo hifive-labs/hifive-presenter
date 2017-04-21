@@ -36,8 +36,23 @@
 		return slideData;
 	}
 	
+	function updateContent(id, content) {
+		slideData.content = content;
+		//Todo: Update Slide to database			
+	}
+	
+	function getContent(id) {
+		return slideData.content;
+		//Todo: Update Slide to database			
+	}
+	
 	function updateState(id, state) {
 		slideData.state = state;
+		//Todo: Update Slide to database			
+	}
+	
+	function getState(id, state) {
+		return slideData.state;
 		//Todo: Update Slide to database			
 	}
 	
