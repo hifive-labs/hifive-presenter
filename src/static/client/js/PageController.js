@@ -48,6 +48,61 @@ $(function() {
 				}
 			});
 
+			//Navigation (HTTP POSTで使う場合)
+			socket.on('slide', function(data) {
+				presentationController.slide(data.h, data.v, data.f);
+			});
+
+			socket.on('left', function() {
+				presentationController.left();
+			});
+
+			socket.on('right', function() {
+				presentationController.right();
+			});
+
+			socket.on('up', function() {
+				presentationController.up();
+			});
+
+			socket.on('down', function() {
+				presentationController.down();
+			});
+
+			socket.on('prev', function() {
+				presentationController.prev();
+			});
+
+			socket.on('next', function() {
+				presentationController.next();
+			});
+
+			socket.on('prevFragment', function() {
+				presentationController.prevFragment();
+			});
+
+			socket.on('nextFragment', function() {
+				presentationController.nextFragment();
+			});
+
+			//内容取得
+			socket.on('getSlideNotes', function() {
+			//	presentationController.getSlideNotes();
+			});
+
+			socket.on('navigateFragment', function() {
+			//	presentationController.navigateFragment();
+			});
+
+			socket.on('getCurrentSlide', function() {
+			//	presentationController.getCurrentSlide();
+			});
+
+			socket.on('getContentOfSlides', function() {
+			//	presentationController.getContentOfSlides();
+			});
+
+			//Navigation (スライドの間の操作)
 			presentationController.rootElement.addEventListener('slidechanged', this._postInfo);
 			presentationController.rootElement.addEventListener('fragmentshown', this._postInfo);
 			presentationController.rootElement.addEventListener('fragmenthidden', this._postInfo);
@@ -59,8 +114,8 @@ $(function() {
 
 		_postInfo: function() {
 			var messageData = {
-				slideData : {
-					state: presentationController.getState(),					
+				slideData: {
+					state: presentationController.getState()
 				},
 				secret: null,
 				socketId: null
@@ -92,7 +147,7 @@ $(function() {
 			presentationController.appendSlides(maskdown2, options);
 
 			var messageData = {
-				"slideData": {
+				slideData: {
 					"content": presentationController.getContentOfSlides(0),
 					"state": 0
 				}
@@ -103,7 +158,7 @@ $(function() {
 		"#btnRemove click": function() {
 			presentationController.removeSlideByIndex(0);
 			var messageData = {
-				"slideData": {
+				slideData: {
 					"content": presentationController.getContentOfSlides(0),
 					"state": 0
 				}
