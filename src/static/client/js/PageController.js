@@ -23,6 +23,9 @@ $(function() {
 
 	var socket = io(HOST_PORT);
 
+	var curSocketId = null; //Current Socket ID
+	var revSocketId = null; //Received Socket ID
+
 	var pageController = {
 		__name: 'com.hifive.PageController',
 
@@ -32,11 +35,20 @@ $(function() {
 			socket.on('initdata', function(data) {
 				presentationController.insertSlidesByHTMLString(data.slideData.content);
 				presentationController.setState(data.slideData.state);
+				curSocketId = data.socketId;
+				revSocketId = null;
+			});
+
+			socket.on('syncdata', function(data) {
+				revSocketId = data.socketId;
+				presentationController.insertSlidesByHTMLString(data.slideData.content);
+				presentationController.setState(data.slideData.state);
 			});
 
 			socket.on('slidestatechanged', function(data) {
 				var isSync = $("#chkSync").is(":checked");
 				if (isSync) {
+					revSocketId = data.socketId;
 					presentationController.setState(data.slideData.state);
 				}
 			});
@@ -44,6 +56,7 @@ $(function() {
 			socket.on('slidecontentchanged', function(data) {
 				var isSync = $("#chkSync").is(":checked");
 				if (isSync) {
+					revSocketId = data.socketId;
 					presentationController.insertSlidesByHTMLString(data.slideData.content);
 				}
 			});
@@ -118,11 +131,15 @@ $(function() {
 					state: presentationController.getState()
 				},
 				secret: null,
-				socketId: null
+				socketId: curSocketId
 			};
 			var isSync = $("#chkSync").is(":checked");
-			if (isSync) {
-				socket.emit('slidestatechanged', messageData);
+			if (revSocketId) {
+				revSocketId = null;
+			} else {
+				if (isSync) {
+					socket.emit('slidestatechanged', messageData);
+				}
 			}
 		},
 
@@ -150,7 +167,8 @@ $(function() {
 				slideData: {
 					"content": presentationController.getContentOfSlides(0),
 					"state": 0
-				}
+				},
+				socketId: curSocketId
 			};
 			socket.emit('slidecontentchanged', messageData);
 		},
@@ -161,7 +179,8 @@ $(function() {
 				slideData: {
 					"content": presentationController.getContentOfSlides(0),
 					"state": 0
-				}
+				},
+				socketId: curSocketId
 			};
 			socket.emit('slidecontentchanged', messageData);
 		},
@@ -170,6 +189,18 @@ $(function() {
 			var num = $("#txtPageNum").val();
 			presentationController.goToSlide(num);
 		},
+
+		"#chkSync change": function() {
+			var isSync = $('#chkSync').is(":checked");
+			var messageData = {
+				slideData: {},
+				secret: null,
+				socketId: curSocketId
+			};
+			if (isSync) {
+				socket.emit('syncdata', messageData);
+			}
+		}
 	//テスト用 - End
 	}
 
