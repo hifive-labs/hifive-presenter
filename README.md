@@ -21,27 +21,26 @@ node app.js
 各ユーザーの間、スライドのデータや状態を非同期・同期化  
 
 ## 部品のフォルダ構成
-**hifive-presenter**  
-|-- LICENSE  
-|-- README.md  
-|-- package.json  
-`-- **src**  
-　　　|-- **server**　*サーバー*  
-　　　|　　　|-- **slide**　*DBにスライド挿入・更新・削除・API*  
-　　　|　　　|　　　|-- slide.controller.js  
-　　　|　　　|-- config.js  
-　　　|　　　`-- routes.js  
-　　　|-- **static**　*クライアント*  
-　　　|　　　|-- **client**　　　→　*WebContent*  
-　　　|　　　|　　　|-- **css**　→　*カスタムCSS*  
-　　　|　　　|　　　|-- **js**  
-　　　|　　　|　　　|　　|-- PageController.js　　　　　　　→　*メインページのコントローラ*  
-　　　|　　　|　　　|　　`-- PresentationController.js　　→　*revealjsをラップしたコントローラ*  
-　　　|　　　|　　　|-- **mdfile**　　　　　　　　　　　　　　　　 →　*マークダウンファイル*  
-　　　|　　　|　　　|　　`-- example.md  
-　　　|　　　|　　　`-- index.html　　　　　　　　　　　　　　→　*メインページ*  
-　　　|　　　`-- **vendor**　　→　*hifive、jquery、revealライブラリ*  
-　　　|　　　　　　|-- **h5**  
-　　　|　　　　　　|-- **jquery**  
-　　　|　　　　　　`-- **reveal**  
-　　　`-- app.js  
+ - __LICENSE__
+ - __README.md__
+ - __package.json__
+ - __src/__
+  - __server/__　　*サーバー*_ 
+   - __slide/__　　*DBにスライド挿入・更新・削除・API*
+    - __slide.controller.js__
+   - __config.js__
+   - __routes.js__
+  - __static/__　　*クライアント*
+   - __client/__　　*WebContent* 
+    - __css/__　　　*カスタムCSS* 
+    - __js/__
+     - __PageController.js__　　*メインページのコントローラ*
+     - __PresentationController.js__　　*revealjsをラップしたコントローラ*  
+    - __mdfile/__　　*マークダウンファイル*
+     - __example.md__
+    - __index.html__　　*メインページ*
+   - __vendor/__　　*hifive、jquery、revealライブラリ*
+    - __h5/__
+    - __jquery/__
+    - __reveal/__
+  - __app.js__
