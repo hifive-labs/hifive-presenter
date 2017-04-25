@@ -25,7 +25,6 @@
 
 	// controllers
 	// var usersCtrl = require('./user/user.controller.js');
-	var slideCtrl = require('./slide/slide.controller.js');
 	
 	/**
 	 * Users
@@ -42,77 +41,92 @@
 	 */
 	
 	router.get('/slides', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'slides', req.body) ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('slides', req.body);
 		res.send(result);
 	});
 	
-	router.post('/slides/left', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'left') ? 'success' : 'failed';
+	router.post('/slides/left', function(req, res, next){		
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('left', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/right', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'right') ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('right', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/up', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'up') ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('up', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/down', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'down') ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('down', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/prev', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'prev') ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('prev', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/next', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'next') ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('next', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/prevFragment', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'prevFragment') ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('prevFragment', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/nextFragment', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'nextFragment') ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('nextFragment', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/getSlideNotes', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'getSlideNotes') ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('getSlideNotes', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/getCurrentSlide', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'getCurrentSlide') ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('getCurrentSlide', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/getContentOfSlides', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'getContentOfSlides') ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('getContentOfSlides', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/slidechanged', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'slidechanged', req.body) ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('slidechanged', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/fragmentshown', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'fragmentshown', req.body) ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('fragmentshown', req.body);
 		res.send(result);
 	});
 	
 	router.post('/slides/fragmenthidden', function(req, res, next){
-		let result = slideCtrl.broadcast(req.io, 'fragmenthidden', req.body) ? 'success' : 'failed';
+		let result = 'none'; // @ToDo: check ERROR and Authorize
+		req.io.emit('fragmenthidden', req.body);
 		res.send(result);
 	});
 	
