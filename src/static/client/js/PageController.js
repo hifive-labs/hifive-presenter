@@ -23,16 +23,112 @@ $(function() {
 
 	var socket = io(HOST_PORT);
 
+	var curSocketId = null; //Current Socket ID
+	var revSocketId = null; //Received Socket ID
+
 	var pageController = {
 		__name: 'com.hifive.PageController',
 
 		__ready: function() {},
 
 		__init: function() {
-			socket.on('slidestatechanged', function(data) {
-				presentationController.setState(data.state);
+			// =========================================================================
+			//
+			// イベントとコールバックの定義
+			//
+			// =========================================================================
+			socket.on('initdata', function(data) {
+				presentationController.createSlidesByHTMLString(data.slideData.content);
+				presentationController.setState(data.slideData.state);
+				curSocketId = data.socketId;
+				revSocketId = null;
 			});
 
+			socket.on('syncdata', function(data) {
+				revSocketId = data.socketId;
+				presentationController.createSlidesByHTMLString(data.slideData.content);
+				presentationController.setState(data.slideData.state);
+			});
+
+			socket.on('slidestatechanged', function(data) {
+				var isSync = $("#chkSync").is(":checked");
+				if (isSync) {
+					revSocketId = data.socketId;
+					presentationController.setState(data.slideData.state);
+				}
+			});
+
+			socket.on('slidecontentchanged', function(data) {
+				var isSync = $("#chkSync").is(":checked");
+				if (isSync) {
+					revSocketId = data.socketId;
+					presentationController.createSlidesByHTMLString(data.slideData.content);
+				}
+			});
+
+			// =========================================================================
+			//
+			// ナビゲーション(HTTP POSTで使う場合)
+			//
+			// =========================================================================
+			socket.on('slide', function(data) {
+				presentationController.slide(data.h, data.v, data.f);
+			});
+
+			socket.on('left', function() {
+				presentationController.left();
+			});
+
+			socket.on('right', function() {
+				presentationController.right();
+			});
+
+			socket.on('up', function() {
+				presentationController.up();
+			});
+
+			socket.on('down', function() {
+				presentationController.down();
+			});
+
+			socket.on('prev', function() {
+				presentationController.prev();
+			});
+
+			socket.on('next', function() {
+				presentationController.next();
+			});
+
+			socket.on('prevFragment', function() {
+				presentationController.prevFragment();
+			});
+
+			socket.on('nextFragment', function() {
+				presentationController.nextFragment();
+			});
+
+			socket.on('navigateFragment', function() {
+			//	TODO: 内容を取得した後、処理を実装する・ presentationController.navigateFragment();
+			});
+
+			// 内容取得(HTTP POSTで使う場合)
+			socket.on('getSlideNotes', function() {
+			//	TODO: 内容を取得した後、処理を実装する・ presentationController.getSlideNotes();
+			});
+
+			socket.on('getCurrentSlide', function() {
+			//	TODO: 内容を取得した後、処理を実装する・ presentationController.getCurrentSlide();
+			});
+
+			socket.on('getContentOfSlides', function() {
+			//	TODO: 内容を取得した後、処理を実装する・ presentationController.getContentOfSlides();
+			});
+
+			// =========================================================================
+			//
+			// 内容取得(スライドの間の操作)
+			//
+			// =========================================================================
 			presentationController.rootElement.addEventListener('slidechanged', this._postInfo);
 			presentationController.rootElement.addEventListener('fragmentshown', this._postInfo);
 			presentationController.rootElement.addEventListener('fragmenthidden', this._postInfo);
@@ -42,16 +138,30 @@ $(function() {
 			presentationController.rootElement.addEventListener('resumed', this._postInfo);
 		},
 
+		//クライアントからサーバーにリクエストを送るメソッド
 		_postInfo: function() {
 			var messageData = {
-				state: presentationController.getState(),
+				slideData: {
+					state: presentationController.getState()
+				},
 				secret: null,
-				socketId: null
+				socketId: curSocketId
 			};
-			socket.emit('slidestatechanged', messageData);
+			var isSync = $("#chkSync").is(":checked");
+			if (revSocketId) {
+				revSocketId = null;
+			} else {
+				if (isSync) {
+					socket.emit('slidestatechanged', messageData);
+				}
+			}
 		},
 
-		//テスト用 - Start
+		// =========================================================================
+		//
+		// ボタンのイベント
+		//
+		// =========================================================================
 		"#btnGet click": function() {
 			alert(presentationController.getContentOfSlides(0));
 		},
@@ -70,17 +180,45 @@ $(function() {
 			};
 			presentationController.insertSlidesAfter(maskdown, options, 1)
 			presentationController.appendSlides(maskdown2, options);
+
+			var messageData = {
+				slideData: {
+					"content": presentationController.getContentOfSlides(0),
+					"state": 0
+				},
+				socketId: curSocketId
+			};
+			socket.emit('slidecontentchanged', messageData);
 		},
 
 		"#btnRemove click": function() {
 			presentationController.removeSlideByIndex(0);
+			var messageData = {
+				slideData: {
+					"content": presentationController.getContentOfSlides(0),
+					"state": 0
+				},
+				socketId: curSocketId
+			};
+			socket.emit('slidecontentchanged', messageData);
 		},
 
 		"#btnGoTo click": function() {
 			var num = $("#txtPageNum").val();
 			presentationController.goToSlide(num);
 		},
-		//テスト用 - End
+
+		"#chkSync change": function() {
+			var isSync = $('#chkSync').is(":checked");
+			var messageData = {
+				slideData: {},
+				secret: null,
+				socketId: curSocketId
+			};
+			if (isSync) {
+				socket.emit('syncdata', messageData);
+			}
+		}
 	}
 
 	h5.core.controller('body', pageController);
