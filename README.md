@@ -1,6 +1,6 @@
-Hifive Presentation Assistant
+hifive Presentation Assistant
 ===============
-Hifive、Reveal.js、Socket.ioを使ってプレゼンテーションアシスタントを作成します.
+hifive、reveal.js、socket.ioを使ってプレゼンテーションアシスタントを作成します.
 
 ## インストール
 git clone http://tritoma.o.sysrdc.ns-sol.co.jp/gitbucket/git/hifive/hifive-presenter.git  
@@ -21,26 +21,29 @@ node app.js
 各ユーザーの間、スライドのデータや状態を非同期・同期化  
 
 ## 部品のフォルダ構成
- - __LICENSE__
- - __README.md__
- - __package.json__
- - __src/__
-  - __server/__　　*サーバー*_ 
-   - __slide/__　　*DBにスライド挿入・更新・削除・API*
-    - __slide.controller.js__
-   - __config.js__
-   - __routes.js__
-  - __static/__　　*クライアント*
-   - __client/__　　*WebContent* 
-    - __css/__　　　*カスタムCSS* 
-    - __js/__
-     - __PageController.js__　　*メインページのコントローラ*
-     - __PresentationController.js__　　*revealjsをラップしたコントローラ*  
-    - __mdfile/__　　*マークダウンファイル*
-     - __example.md__
-    - __index.html__　　*メインページ*
-   - __vendor/__　　*hifive、jquery、revealライブラリ*
-    - __h5/__
-    - __jquery/__
-    - __reveal/__
-  - __app.js__
+**hifive-presenter**  
+　　　├── **LICENSE**  
+　　　├── **package.json**  
+　　　├── **README.md**  
+　　　├── **src**  
+　　　│　　　├── **app.js**  
+　　　│　　　├── **server**　　　　　　　　　　　*サーバー*  
+　　　│　　　│　　　├── **config.js**　　　　　　*DB設定・開発・テストパスとポートの定義*  
+　　　│　　　│　　　├── **routes.js**　　　　　　*API Router*  
+　　　│　　　│　　　└── **slide**　　　　　　　　*DBにスライド挿入・更新・削除・API*  
+　　　│　　　│　　　　　　 └── **slide.controller.js**  
+　　　│　　　└── **static**　　　　　　　　　　　*クライアント*  
+　　　│　　　　　　 ├── **client**　　　　　　　　*WebContent*  
+　　　│　　　　　　 │　　　├── **index.html**  　　*メインページ*  
+　　　│　　　　　　 │　　　├── **css**　　　　　*カスタムCSS*  
+　　　│　　　　　　 │　　　├── **js**  
+　　　│　　　　　　 │　　　│　　├── **PageController.js**　　　　　　　*メインページのコントローラ*  
+　　　│　　　　　　 │　　　│　　└── **PresentationController.js**　　　*revealjsをラップしたコントローラ*  
+　　　│　　　　　　 │　　　└── **mdfile**　　　　　*マークダウンファイル*  
+　　　│　　　　　　 │　　　　　 └── **example.md**  
+　　　│　　　　　　 └──**vendor**　　　　　　　　*hifive、jquery、revealライブラリ*  
+　　　│　　　　　　　　　  ├── **h5**  
+　　　│　　　　　　　　　  ├── **jquery**  
+　　　│　　　　　　　　　  └── **reveal**  
+　　　└── **test**  
+　　　　　　 └── **test.js**
