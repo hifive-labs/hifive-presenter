@@ -228,7 +228,7 @@
 		/**
 		 * 前のスライドを取得する。 Retrieves the previous slide elements
 		 *
-		 * @returns 前のスライドオブジェット
+		 * @returns 前のスライドオブジェクト
 		 */
 		getPreviousSlide: function() {
 			return this.curReveal.getPreviousSlide();
@@ -237,7 +237,7 @@
 		/**
 		 * 現在のスライドを取得する。 Retrieves the current slide elements
 		 *
-		 * @returns 現在のスライドオブジェット
+		 * @returns 現在のスライドオブジェクト
 		 */
 		getCurrentSlide: function() {
 			return this.curReveal.getCurrentSlide();
@@ -282,7 +282,7 @@
 		/**
 		 * スライド状態を取得する。
 		 *
-		 * @returns {Object} スライド状態のオブジェット
+		 * @returns {Object} スライド状態のオブジェクト
 		 */
 		getState: function() {
 			return this.curReveal.getState();
@@ -411,7 +411,7 @@
 		 * スライドの内容を取得
 		 *
 		 * @param {Number} kind 内容タイプ区分
-		 * @returns {String} content kindが0の場合、平文（文字列)。kindが1の場合、構造化オブジェット
+		 * @returns {String} content kindが0の場合、平文（文字列)。kindが1の場合、構造化オブジェクト
 		 */
 		getContentOfSlides: function(kind) {
 			var content;
@@ -434,7 +434,7 @@
 		/**
 		 * 現在のスライドの内容を取得
 		 *
-		 * @returns {String} カレントオブジェットの内容
+		 * @returns {String} カレントオブジェクトの内容
 		 */
 		getContentOfCurrentSlide: function() {
 			var curretSlideObj = this.getCurrentSlide();
