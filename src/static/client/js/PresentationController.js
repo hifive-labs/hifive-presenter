@@ -21,7 +21,7 @@
 
 		__construct: function(context) {
 			this.curReveal = Reveal;
-
+			//オプション
 			var options = {
 				history: true,
 				dependencies: [{
@@ -42,165 +42,314 @@
 			this.initialize(options);
 		},
 
-		/*******************************************************************************************
-		 * 初期化
-		 */
-		__init: function(context) {
-
-		},
+		// =========================================================================
+		//
+		// 初期化、
+		// 設定・状態を設定
+		//
+		// =========================================================================
 
 		/**
-		 * initialize
+		 * スライドを初期化する。
+		 *
+		 * @param {Object} options 設定値
 		 */
 		initialize: function(options) {
 			this.curReveal.initialize(options);
 		},
 
-		// Change a config value at runtime
+		/**
+		 * ランタイム際、設定値を更新する。
+		 *
+		 * @param {Object} options 設定値
+		 */
 		configure: function(options) {
 			this.curReveal.configure(options);
 		},
 
+		/**
+		 * スライドを同期する。
+		 */
 		sync: function() {
 			this.curReveal.sync();
 		},
 
 		/**
-		 * NAVIGATION
+		 * スライド状態を設定する。
+		 *
+		 * @param {Object} state スライド状態
+		 */
+		setState: function(state) {
+			this.curReveal.setState(state);
+		},
+
+		// =========================================================================
+		//
+		// ナビゲーション
+		//
+		// =========================================================================
+
+		/**
+		 * 指定したインデックススライドを移動する
+		 *
+		 * @param {Number} indexh 水平インデックス
+		 * @param {Number} indexv 垂直インデックス
+		 * @param {Number} indexf フラグメントインデックス
 		 */
 		slide: function(indexh, indexv, indexf) {
 			this.curReveal.slide(indexh, indexv, indexf)
 		},
 
+		/**
+		 * 左のスライドへ移動する。
+		 */
 		left: function() {
 			this.curReveal.left();
 		},
 
+		/**
+		 * 右のスライドへ移動する。
+		 */
 		right: function() {
 			this.curReveal.right();
 		},
 
+		/**
+		 * 上のスライドへ移動する。
+		 */
 		up: function() {
 			this.curReveal.up();
 		},
 
+		/**
+		 * 下のスライドへ移動する。
+		 */
 		down: function() {
 			this.curReveal.down();
 		},
 
+		/**
+		 * 前のスライドへ移動する。
+		 */
 		prev: function() {
 			this.curReveal.prev();
 		},
 
+		/**
+		 * 次のスライドへ移動する。
+		 */
 		next: function() {
 			this.curReveal.next();
 		},
 
+		/**
+		 * 前のフラグメントへ移動する。
+		 */
 		prevFragment: function() {
 			this.curReveal.prevFragment();
 		},
 
+		/**
+		 * 次のフラグメントへ移動する。
+		 */
 		nextFragment: function() {
 			this.curReveal.nextFragment();
 		},
 
+		/**
+		 * 指定したフラグメントへ移動する。
+		 *
+		 * @param {Number} index フラグメントインデックス
+		 * @param {Number} offset フラグメントインデックスのオフセット
+		 */
 		navigateFragment: function(index, offset) {
 			this.curReveal.navigateFragment(index, offset);
 		},
 
-		// Randomize the order of slides
+		/**
+		 * スライドの順番をランダム化する。
+		 */
 		shuffle: function() {
 			this.curReveal.shuffle();
 		},
 
-		// Shows a help overlay with keyboard shortcuts
+		/**
+		 * キーボードショットカットでhelpを表示する
+		 */
 		showHelp: function() {
 			this.curReveal.showHelp();
 		},
 
-		// Toggle presentation states, optionally pass true/false to force on/off
+		/**
+		 * 概要状態を切り替える
+		 */
 		toggleOverview: function() {
 			this.curReveal.toggleOverview();
 		},
 
+		/**
+		 * ポーズ状態を切り替える
+		 */
 		togglePause: function() {
 			this.curReveal.togglePause();
 		},
 
+		/**
+		 * 自動スライド状態を切り替える
+		 */
 		toggleAutoSlide: function() {
 			this.curReveal.toggleAutoSlide();
 		},
 
-		// Returns the present configuration options
+		// =========================================================================
+		//
+		// 設定値・インデックス・値を取得する
+		//
+		// =========================================================================
+
+		/**
+		 * スライドの設定値を取得する。
+		 *
+		 * @returns スライドの設定値
+		 */
 		getConfig: function() {
 			return this.curReveal.getConfig();
 		},
 
-		// Fetch the current scale of the presentation
+		/**
+		 * スライドのスケールを取得する。
+		 *
+		 * @returns スライドのスケール
+		 */
 		getScale: function() {
 			return this.curReveal.getScale();
 		},
 
-		// Retrieves the previous and current slide elements
+		/**
+		 * 前のスライドを取得する。 Retrieves the previous slide elements
+		 *
+		 * @returns 前のスライドオブジェット
+		 */
 		getPreviousSlide: function() {
 			return this.curReveal.getPreviousSlide();
 		},
 
+		/**
+		 * 現在のスライドを取得する。 Retrieves the current slide elements
+		 *
+		 * @returns 現在のスライドオブジェット
+		 */
 		getCurrentSlide: function() {
 			return this.curReveal.getCurrentSlide();
 		},
 
+		/**
+		 * スライドのインデックスを取得する。
+		 *
+		 * @returns スライドのインデックス
+		 */
 		getIndices: function() {
-			return this.curReveal.getIndices(); // { h: 0, v: 0 } }
+			return this.curReveal.getIndices(); // { h: 0, v: 0 }
 		},
 
+		/**
+		 * スライドの進捗状況を取得する
+		 *
+		 * @returns スライドの進捗状況（値：0-1）
+		 */
 		getProgress: function() {
-			return this.curReveal.getProgress(); // 0-1
+			return this.curReveal.getProgress();
 		},
 
+		/**
+		 * 全てのスライド数を取得する。
+		 *
+		 * @returns {Number} スライド数
+		 */
 		getTotalSlides: function() {
 			return this.curReveal.getTotalSlides();
 		},
 
-		// Returns the speaker notes for the current slide
+		/**
+		 * カレントのスライドのメモを取得する。
+		 *
+		 * @returns カレントのスライドのメモ
+		 */
 		getSlideNotes: function() {
 			return this.curReveal.getSlideNotes();
 		},
 
-		// State checks
-		isFirstSlide: function() {
-			return this.curReveal.isFirstSlide();
-		},
-
-		isLastSlide: function() {
-			return this.curReveal.isLastSlide();
-		},
-
-		isOverview: function() {
-			return this.curReveal.isOverview();
-		},
-
-		isPaused: function() {
-			return this.curReveal.isPaused();
-		},
-
-		isAutoSliding: function() {
-			return this.curReveal.isAutoSliding();
-		},
-
-		setState: function(state) {
-			this.curReveal.setState(state);
-		},
-
+		/**
+		 * スライド状態を取得する。
+		 *
+		 * @returns {Object} スライド状態のオブジェット
+		 */
 		getState: function() {
 			return this.curReveal.getState();
 		},
 
+		// =========================================================================
+		//
+		// 状態チェック
+		//
+		// =========================================================================
+
+		/**
+		 * 最初のスライドかどうかをチェックする。
+		 *
+		 * @returns {boolean} 最初のスライドかどうか
+		 */
+		isFirstSlide: function() {
+			return this.curReveal.isFirstSlide();
+		},
+
+		/**
+		 * 最後のスライドかどうかをチェックする。
+		 *
+		 * @returns {boolean} 最後のスライドかどうか
+		 */
+		isLastSlide: function() {
+			return this.curReveal.isLastSlide();
+		},
+
+		/**
+		 * 概要かどうかをチェックする。
+		 *
+		 * @returns {boolean} 概要かどうか
+		 */
+		isOverview: function() {
+			return this.curReveal.isOverview();
+		},
+
+		/**
+		 * ポーズかどうかをチェックする。
+		 *
+		 * @returns {boolean} ポーズかどうか
+		 */
+		isPaused: function() {
+			return this.curReveal.isPaused();
+		},
+
+		/**
+		 * 自動スライディングかどうかをチェックする。
+		 *
+		 * @returns {boolean} 自動スライディングかどうか
+		 */
+		isAutoSliding: function() {
+			return this.curReveal.isAutoSliding();
+		},
+
+		// =========================================================================
+		//
+		// EXPANSION FROM REVEAL.JS
+		//
+		// =========================================================================
+
 		/**
 		 * マークダウン形式の文字列からスライド内容表示 スライド追加する
 		 *
-		 * @params maskdown (文字列、マークダウン形式) options (セパレーターオブジェクト) separator notesSeparator
-		 *         verticalSeparator attributes
+		 * @param {String} maskdown (文字列、マークダウン形式)
+		 * @param {Object} options {separator, notesSeparator, verticalSeparator, attributes}
 		 */
 		appendSlides: function(maskdown, options) {
 			var sections = $(this.rootElement).find('.slides > section');
@@ -210,8 +359,8 @@
 		/**
 		 * マークダウン形式の文字列からスライド内容表示
 		 *
-		 * @params maskdown (文字列、マークダウン形式) options (セパレーターオブジェクト) separator notesSeparator
-		 *         verticalSeparator attributes index(指定したインデックス)
+		 * @param {String} maskdown (文字列、マークダウン形式)
+		 * @param {Object} options {separator, notesSeparator, verticalSeparator, attributes}
 		 */
 		insertSlidesAfter: function(maskdown, options, index) {
 			var convertToHTMLStr = RevealMarkdown.slidify(maskdown, options);
@@ -231,10 +380,11 @@
 		},
 
 		/**
+		 * HTML文字列からスライドを作成する。
 		 *
-		 *
+		 * @param {String} htmlString HTML文字列
 		 */
-		 insertSlidesByHTMLString: function(htmlString) {
+		createSlidesByHTMLString: function(htmlString) {
 			var slidesNode = $(this.rootElement).find('.slides');
 			slidesNode.empty();
 			slidesNode.append(htmlString);
@@ -246,7 +396,7 @@
 		/**
 		 * インデックス指定したスライドを削除する。
 		 *
-		 * @params index(インデックス)
+		 * @param {Number} index インデックス
 		 */
 		removeSlideByIndex: function(index) {
 			var sections = $(this.rootElement).find('.slides > section');
@@ -260,8 +410,8 @@
 		/**
 		 * スライドの内容を取得
 		 *
-		 * @params kind
-		 * @return content kind = 0 の場合、平文（文字列)。kind = 1 の場合、構造化オブジェット
+		 * @param {Number} kind 内容タイプ区分
+		 * @returns {String} content kindが0の場合、平文（文字列)。kindが1の場合、構造化オブジェット
 		 */
 		getContentOfSlides: function(kind) {
 			var content;
@@ -277,14 +427,14 @@
 				}
 				return content;
 			} else {
-
+				//TODO : kindが0以外の場合
 			}
 		},
 
 		/**
 		 * 現在のスライドの内容を取得
 		 *
-		 * @return content(カレントオブジェットの内容)
+		 * @returns {String} カレントオブジェットの内容
 		 */
 		getContentOfCurrentSlide: function() {
 			var curretSlideObj = this.getCurrentSlide();
@@ -294,14 +444,13 @@
 		/**
 		 * スライド操作 (番号指定)
 		 *
-		 * @params slideNo (スライド番号: 1～スライス数)
+		 * @param {Number} slideNo (スライド番号: 1～スライス数)
 		 */
 		goToSlide: function(slideNo) {
 			if (slideNo && Number(slideNo) >= 1) {
 				this.slide(slideNo - 1, 0, 0);
 			}
 		},
-
 	}
 	h5.core.expose(presentationController);
 })(Reveal);

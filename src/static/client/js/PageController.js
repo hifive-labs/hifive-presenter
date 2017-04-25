@@ -32,8 +32,13 @@ $(function() {
 		__ready: function() {},
 
 		__init: function() {
+			// =========================================================================
+			//
+			// イベントとコールバックの定義
+			//
+			// =========================================================================
 			socket.on('initdata', function(data) {
-				presentationController.insertSlidesByHTMLString(data.slideData.content);
+				presentationController.createSlidesByHTMLString(data.slideData.content);
 				presentationController.setState(data.slideData.state);
 				curSocketId = data.socketId;
 				revSocketId = null;
@@ -41,7 +46,7 @@ $(function() {
 
 			socket.on('syncdata', function(data) {
 				revSocketId = data.socketId;
-				presentationController.insertSlidesByHTMLString(data.slideData.content);
+				presentationController.createSlidesByHTMLString(data.slideData.content);
 				presentationController.setState(data.slideData.state);
 			});
 
@@ -57,11 +62,15 @@ $(function() {
 				var isSync = $("#chkSync").is(":checked");
 				if (isSync) {
 					revSocketId = data.socketId;
-					presentationController.insertSlidesByHTMLString(data.slideData.content);
+					presentationController.createSlidesByHTMLString(data.slideData.content);
 				}
 			});
 
-			//Navigation (HTTP POSTで使う場合)
+			// =========================================================================
+			//
+			// ナビゲーション(HTTP POSTで使う場合)
+			//
+			// =========================================================================
 			socket.on('slide', function(data) {
 				presentationController.slide(data.h, data.v, data.f);
 			});
@@ -98,24 +107,28 @@ $(function() {
 				presentationController.nextFragment();
 			});
 
-			//内容取得
-			socket.on('getSlideNotes', function() {
-			//	presentationController.getSlideNotes();
+			socket.on('navigateFragment', function() {
+			//	TODO: 内容を取得した後、処理を実装する・ presentationController.navigateFragment();
 			});
 
-			socket.on('navigateFragment', function() {
-			//	presentationController.navigateFragment();
+			// 内容取得(HTTP POSTで使う場合)
+			socket.on('getSlideNotes', function() {
+			//	TODO: 内容を取得した後、処理を実装する・ presentationController.getSlideNotes();
 			});
 
 			socket.on('getCurrentSlide', function() {
-			//	presentationController.getCurrentSlide();
+			//	TODO: 内容を取得した後、処理を実装する・ presentationController.getCurrentSlide();
 			});
 
 			socket.on('getContentOfSlides', function() {
-			//	presentationController.getContentOfSlides();
+			//	TODO: 内容を取得した後、処理を実装する・ presentationController.getContentOfSlides();
 			});
 
-			//Navigation (スライドの間の操作)
+			// =========================================================================
+			//
+			// 内容取得(スライドの間の操作)
+			//
+			// =========================================================================
 			presentationController.rootElement.addEventListener('slidechanged', this._postInfo);
 			presentationController.rootElement.addEventListener('fragmentshown', this._postInfo);
 			presentationController.rootElement.addEventListener('fragmenthidden', this._postInfo);
@@ -125,6 +138,7 @@ $(function() {
 			presentationController.rootElement.addEventListener('resumed', this._postInfo);
 		},
 
+		//クライアントからサーバーにリクエストを送るメソッド
 		_postInfo: function() {
 			var messageData = {
 				slideData: {
@@ -143,7 +157,11 @@ $(function() {
 			}
 		},
 
-		//テスト用 - Start
+		// =========================================================================
+		//
+		// ボタンのイベント
+		//
+		// =========================================================================
 		"#btnGet click": function() {
 			alert(presentationController.getContentOfSlides(0));
 		},
@@ -201,7 +219,6 @@ $(function() {
 				socket.emit('syncdata', messageData);
 			}
 		}
-	//テスト用 - End
 	}
 
 	h5.core.controller('body', pageController);
