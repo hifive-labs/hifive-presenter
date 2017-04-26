@@ -16,12 +16,11 @@
 $(function() {
 	// コントローラ化
 	var PresentationController = com.hifive.PresentationController;
-	let
-	presentationController = h5.core.controller('.reveal', PresentationController);
+	var presentationController = h5.core.controller('.reveal', PresentationController);
 
-	var HOST_PORT = "http://localhost:3000/slides";
+	var HOST = window.location.host; //ホスト（ポートを含む)
 
-	var socket = io(HOST_PORT);
+	var socket = io("http://" + HOST + "/slides");
 
 	var curSocketId = null; //Current Socket ID
 	var revSocketId = null; //Received Socket ID
