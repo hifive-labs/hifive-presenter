@@ -170,15 +170,15 @@ $(function() {
 		},
 
 		"#btnAdd click": function() {
-			var maskdown = "## xExternal1\n\nContent1\n\n## xExternal2\n\nxContent2\n\nxNote: This will only appear.\n\n## xExternalNote1.1\n\n---\n\n# xExternal2\n## xSubhead 2\n\n---\n\n## xExternal3\n[xContent 3](http://google.com)";
-			var maskdown2 = "## Append1\n\n1\n\n## abcxyz\n\n---\n\n# Append2\n\n## Content 2\n\n---\n\n## Append3\n\n[Content 3](http://google.com)";
+			var markdown = "## xExternal1\n\nContent1\n\n## xExternal2\n\nxContent2\n\nxNote: This will only appear.\n\n## xExternalNote1.1\n\n---\n\n# xExternal2\n## xSubhead 2\n\n---\n\n## xExternal3\n[xContent 3](http://google.com)";
+			var markdown2 = "## Append1\n\n1\n\n## abcxyz\n\n---\n\n# Append2\n\n## Content 2\n\n---\n\n## Append3\n\n[Content 3](http://google.com)";
 			var options = {
 				attributes: "",
 				notesSeparator: null,
 				separator: "---"
 			};
-			presentationController.insertSlidesAfter(maskdown, options, 1)
-			presentationController.appendSlides(maskdown2, options);
+			presentationController.insertSlidesAfter(markdown, options, 1)
+			presentationController.appendSlides(markdown2, options);
 
 			var messageData = {
 				slideData: {
