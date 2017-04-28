@@ -42,7 +42,7 @@ node app.js
 
 * 各ユーザ間でスライドのデータや状態をサーバを介して同期化（WebSocketを使用）  
 
-※ *同期機能が必要なければPresentationController.jsを単独で読み込んで使用できます。*  
+※ 同期機能が必要なければPresentationController.jsを単独で読み込んで使用できます。  
 
 ## 部品のフォルダ構成
 
