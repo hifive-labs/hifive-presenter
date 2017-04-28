@@ -19,8 +19,9 @@ $(function() {
 	var presentationController = h5.core.controller('.reveal', PresentationController);
 
 	var HOST = window.location.host; //ホスト（ポートを含む)
+	var PROTOCOL = window.location.protocol; //プロトコル
 
-	var socket = io("http://" + HOST + "/slides");
+	var socket = io(PROTOCOL + '//' + HOST + '/slides');
 
 	var curSocketId = null; //Current Socket ID
 	var revSocketId = null; //Received Socket ID
@@ -220,5 +221,7 @@ $(function() {
 		}
 	}
 
-	h5.core.controller('body', pageController);
+	$(function(){
+		h5.core.controller('body', pageController);
+	});
 });
