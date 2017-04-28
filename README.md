@@ -1,65 +1,65 @@
 hifive Presentation Assistant
 ===============
-hifiveAreveal.jsAsocket.io‚ðŽg‚Á‚ÄƒvƒŒƒ[ƒ“ƒe[ƒVƒ‡ƒ“ƒAƒVƒXƒ^ƒ“ƒg‚ðì¬‚µ‚Ü‚·.
+hifiveã€reveal.jsã€socket.ioã‚’ä½¿ã£ã¦ãƒ—ãƒ¬ã‚¼ãƒ³ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã‚¢ã‚·ã‚¹ã‚¿ãƒ³ãƒˆã‚’ä½œæˆã—ã¾ã™.
 
-## ƒCƒ“ƒXƒg[ƒ‹
+## ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 ```
 git clone http://tritoma.o.sysrdc.ns-sol.co.jp/gitbucket/git/hifive/hifive-presenter.git  
 cd hifive-presenter  
 npm install  
 ```
 
-## ƒT[ƒo[‹N“®
+## ã‚µãƒ¼ãƒãƒ¼èµ·å‹•
 ```
 cd src  
 node app.js  
 ```
 
-## “®ìŠm”F
-* **“®ìŠÂ‹«**  
-Google Chrome (ƒo[ƒWƒ‡ƒ“F 57.0.2987.133(64-bit))  
-Internet Explorer 11 (ƒo[ƒWƒ‡ƒ“F 11.0.9600.18638)  
-* **“®ìŽè‡**  
-ƒT[ƒo[‚ð‹N“®‚·‚é  
-•¡”ƒ^ƒu‚ðŠJ‚­  
-`http://localhost:3000` ‚ÖƒAƒNƒZƒX‚·‚é  
+## å‹•ä½œç¢ºèª
+* **å‹•ä½œç’°å¢ƒ**  
+Google Chrome (ãƒãƒ¼ã‚¸ãƒ§ãƒ³ï¼š 57.0.2987.133(64-bit))  
+Internet Explorer 11 (ãƒãƒ¼ã‚¸ãƒ§ãƒ³ï¼š 11.0.9600.18638)  
+* **å‹•ä½œæ‰‹é †**  
+ã‚µãƒ¼ãƒãƒ¼ã‚’èµ·å‹•ã™ã‚‹  
+è¤‡æ•°ã‚¿ãƒ–ã‚’é–‹ã  
+`http://localhost:3000` ã¸ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹  
 
-## •”•i‹@”\ˆê——
+## éƒ¨å“æ©Ÿèƒ½ä¸€è¦§
 * **PresentationController**  
-ƒXƒ‰ƒCƒh‚ÌƒiƒrƒQ[ƒVƒ‡ƒ“i¶A‰EAãA‰ºA‘O‚ÌƒXƒ‰ƒCƒhAŽŸ‚ÌƒXƒ‰ƒCƒhAƒXƒ‰ƒCƒh”Ô†‚ÅˆÚ“®)  
-ƒ}[ƒNƒ_ƒEƒ“Œ`Ž®‚Ì•¶Žš—ñ‚©‚çƒXƒ‰ƒCƒh‚Ì’Ç‰Á  
-ƒCƒ“ƒfƒbƒNƒX‚©‚çƒXƒ‰ƒCƒh‚Ìíœ  
-ƒXƒ‰ƒCƒh‚Ì•½•¶(HTML“à—e)Žæ“¾(‘S‚Ä‚ÌƒXƒ‰ƒCƒhAŒ»Ý‚ÌƒXƒ‰ƒCƒh)  
-HTML•¶Žš—ñ‚©‚çƒXƒ‰ƒCƒh‚Ìì¬
+ã‚¹ãƒ©ã‚¤ãƒ‰ã®ãƒŠãƒ“ã‚²ãƒ¼ã‚·ãƒ§ãƒ³ï¼ˆå·¦ã€å³ã€ä¸Šã€ä¸‹ã€å‰ã®ã‚¹ãƒ©ã‚¤ãƒ‰ã€æ¬¡ã®ã‚¹ãƒ©ã‚¤ãƒ‰ã€ã‚¹ãƒ©ã‚¤ãƒ‰ç•ªå·ã§ç§»å‹•)  
+ãƒžãƒ¼ã‚¯ãƒ€ã‚¦ãƒ³å½¢å¼ã®æ–‡å­—åˆ—ã‹ã‚‰ã‚¹ãƒ©ã‚¤ãƒ‰ã®è¿½åŠ   
+ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‹ã‚‰ã‚¹ãƒ©ã‚¤ãƒ‰ã®å‰Šé™¤  
+ã‚¹ãƒ©ã‚¤ãƒ‰ã®å¹³æ–‡(HTMLå†…å®¹)å–å¾—(å…¨ã¦ã®ã‚¹ãƒ©ã‚¤ãƒ‰ã€ç¾åœ¨ã®ã‚¹ãƒ©ã‚¤ãƒ‰)  
+HTMLæ–‡å­—åˆ—ã‹ã‚‰ã‚¹ãƒ©ã‚¤ãƒ‰ã®ä½œæˆ
 * **PageController**  
-Šeƒ†[ƒUŠÔ‚ÅƒXƒ‰ƒCƒh‚Ìƒf[ƒ^‚âó‘Ô‚ðƒT[ƒo‚ð‰î‚µ‚Ä“¯Šú‰»iWebSocket‚ðŽg—pj  
+å„ãƒ¦ãƒ¼ã‚¶é–“ã§ã‚¹ãƒ©ã‚¤ãƒ‰ã®ãƒ‡ãƒ¼ã‚¿ã‚„çŠ¶æ…‹ã‚’ã‚µãƒ¼ãƒã‚’ä»‹ã—ã¦åŒæœŸåŒ–ï¼ˆWebSocketã‚’ä½¿ç”¨ï¼‰  
 
-¦ *“¯Šú‹@”\‚ª•K—v‚È‚¯‚ê‚ÎPresentationController.js‚ð’P“Æ‚Å“Ç‚Ýž‚ñ‚ÅŽg—p‚Å‚«‚Ü‚·B*  
+â€» *åŒæœŸæ©Ÿèƒ½ãŒå¿…è¦ãªã‘ã‚Œã°PresentationController.jsã‚’å˜ç‹¬ã§èª­ã¿è¾¼ã‚“ã§ä½¿ç”¨ã§ãã¾ã™ã€‚*  
 
-## •”•i‚ÌƒtƒHƒ‹ƒ_\¬
+## éƒ¨å“ã®ãƒ•ã‚©ãƒ«ãƒ€æ§‹æˆ
 **hifive-presenter**  
-@@@„¥„Ÿ„Ÿ **LICENSE**  
-@@@„¥„Ÿ„Ÿ **package.json**  
-@@@„¥„Ÿ„Ÿ **README.md**  
-@@@„¥„Ÿ„Ÿ **src**  
-@@@„ @@@„¥„Ÿ„Ÿ **app.js**  
-@@@„ @@@„¥„Ÿ„Ÿ **server**@@@@@@@@@@@*ƒT[ƒo[*  
-@@@„ @@@„ @@@„¥„Ÿ„Ÿ **config.js**@@@@@@*DBÝ’èEŠJ”­EƒeƒXƒgƒpƒX‚Æƒ|[ƒg‚Ì’è‹`*  
-@@@„ @@@„ @@@„¥„Ÿ„Ÿ **routes.js**@@@@@@*API Router*  
-@@@„ @@@„ @@@„¤„Ÿ„Ÿ **slide**@@@@@@@@*DB‚ÉƒXƒ‰ƒCƒh‘}“üEXVEíœEAPI*  
-@@@„ @@@„ @@@@@@ „¤„Ÿ„Ÿ **slide.controller.js**  
-@@@„ @@@„¤„Ÿ„Ÿ **static**@@@@@@@@@@@*ƒNƒ‰ƒCƒAƒ“ƒg*  
-@@@„ @@@@@@ „¥„Ÿ„Ÿ **client**@@@@@@@@*WebContent*  
-@@@„ @@@@@@ „ @@@„¥„Ÿ„Ÿ **index.html**  @@*ƒƒCƒ“ƒy[ƒW*  
-@@@„ @@@@@@ „ @@@„¥„Ÿ„Ÿ **css**@@@@@*ƒJƒXƒ^ƒ€CSS*  
-@@@„ @@@@@@ „ @@@„¥„Ÿ„Ÿ **js**  
-@@@„ @@@@@@ „ @@@„ @@„¥„Ÿ„Ÿ **PageController.js**@@@@@@@*ƒƒCƒ“ƒy[ƒW‚ÌƒRƒ“ƒgƒ[ƒ‰*  
-@@@„ @@@@@@ „ @@@„ @@„¤„Ÿ„Ÿ **PresentationController.js**@@@*revealjs‚ðƒ‰ƒbƒv‚µ‚½ƒRƒ“ƒgƒ[ƒ‰*  
-@@@„ @@@@@@ „ @@@„¤„Ÿ„Ÿ **mdfile**@@@@@*ƒ}[ƒNƒ_ƒEƒ“ƒtƒ@ƒCƒ‹*  
-@@@„ @@@@@@ „ @@@@@ „¤„Ÿ„Ÿ **example.md**  
-@@@„ @@@@@@ „¤„Ÿ„Ÿ**vendor**@@@@@@@@*hifiveAjqueryArevealƒ‰ƒCƒuƒ‰ƒŠ*  
-@@@„ @@@@@@@@@  „¥„Ÿ„Ÿ **h5**  
-@@@„ @@@@@@@@@  „¥„Ÿ„Ÿ **jquery**  
-@@@„ @@@@@@@@@  „¤„Ÿ„Ÿ **reveal**  
-@@@„¤„Ÿ„Ÿ **test**  
-@@@@@@ „¤„Ÿ„Ÿ **test.js**
+ã€€ã€€ã€€â”œâ”€â”€ **LICENSE**  
+ã€€ã€€ã€€â”œâ”€â”€ **package.json**  
+ã€€ã€€ã€€â”œâ”€â”€ **README.md**  
+ã€€ã€€ã€€â”œâ”€â”€ **src**  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€â”œâ”€â”€ **app.js**  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€â”œâ”€â”€ **server**ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€*ã‚µãƒ¼ãƒãƒ¼*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€â”‚ã€€ã€€ã€€â”œâ”€â”€ **config.js**ã€€ã€€ã€€ã€€ã€€ã€€*DBè¨­å®šãƒ»é–‹ç™ºãƒ»ãƒ†ã‚¹ãƒˆãƒ‘ã‚¹ã¨ãƒãƒ¼ãƒˆã®å®šç¾©*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€â”‚ã€€ã€€ã€€â”œâ”€â”€ **routes.js**ã€€ã€€ã€€ã€€ã€€ã€€*API Router*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€â”‚ã€€ã€€ã€€â””â”€â”€ **slide**ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€*DBã«ã‚¹ãƒ©ã‚¤ãƒ‰æŒ¿å…¥ãƒ»æ›´æ–°ãƒ»å‰Šé™¤ãƒ»API*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ â””â”€â”€ **slide.controller.js**  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€â””â”€â”€ **static**ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€*ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆ*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ â”œâ”€â”€ **client**ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€*WebContent*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ â”‚ã€€ã€€ã€€â”œâ”€â”€ **index.html**  ã€€ã€€*ãƒ¡ã‚¤ãƒ³ãƒšãƒ¼ã‚¸*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ â”‚ã€€ã€€ã€€â”œâ”€â”€ **css**ã€€ã€€ã€€ã€€ã€€*ã‚«ã‚¹ã‚¿ãƒ CSS*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ â”‚ã€€ã€€ã€€â”œâ”€â”€ **js**  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ â”‚ã€€ã€€ã€€â”‚ã€€ã€€â”œâ”€â”€ **PageController.js**ã€€ã€€ã€€ã€€ã€€ã€€ã€€*ãƒ¡ã‚¤ãƒ³ãƒšãƒ¼ã‚¸ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ â”‚ã€€ã€€ã€€â”‚ã€€ã€€â””â”€â”€ **PresentationController.js**ã€€ã€€ã€€*revealjsã‚’ãƒ©ãƒƒãƒ—ã—ãŸã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ â”‚ã€€ã€€ã€€â””â”€â”€ **mdfile**ã€€ã€€ã€€ã€€ã€€*ãƒžãƒ¼ã‚¯ãƒ€ã‚¦ãƒ³ãƒ•ã‚¡ã‚¤ãƒ«*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ â”‚ã€€ã€€ã€€ã€€ã€€ â””â”€â”€ **example.md**  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ â””â”€â”€**vendor**ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€*hifiveã€jqueryã€revealãƒ©ã‚¤ãƒ–ãƒ©ãƒª*  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€  â”œâ”€â”€ **h5**  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€  â”œâ”€â”€ **jquery**  
+ã€€ã€€ã€€â”‚ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€  â””â”€â”€ **reveal**  
+ã€€ã€€ã€€â””â”€â”€ **test**  
+ã€€ã€€ã€€ã€€ã€€ã€€ â””â”€â”€ **test.js**
