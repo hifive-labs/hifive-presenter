@@ -48,7 +48,7 @@
 		res.sendFile(__dirname + '/static/client/index.html');
 	});
 	app.use(express.static('static/client'));
-	app.use(express.static('static/vendor'));
+	app.use(express.static('static/res/lib'));
 
 	/**
 	 * Slide socket

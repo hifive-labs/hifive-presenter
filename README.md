@@ -67,10 +67,11 @@ hifive-presenter
 　　　│　　　　　　 │　　　│　　└── PresentationController.js　　　revealjsをラップしたコントローラ  
 　　　│　　　　　　 │　　　└── mdfile　　　　　マークダウンファイル  
 　　　│　　　　　　 │　　　　　 └── example.md  
-　　　│　　　　　　 └──vendor　　　　　　　　hifive、jquery、revealライブラリ  
-　　　│　　　　　　　　　  ├── h5  
-　　　│　　　　　　　　　  ├── jquery  
-　　　│　　　　　　　　　  └── reveal  
+　　　│　　　　　　 └── res　　　　　　　　hifive、jquery、revealライブラリ  
+　　　│　　　　　　 　　　└── lib　　　　　
+　　　│　　　　　　　　　　　　 ├── hifive  
+　　　│　　　　　　　　　　　　 ├── jquery  
+　　　│　　　　　　　　　　　　 └── reveal  
 　　　└── test  
 　　　　　　 └── test.js
 ```
