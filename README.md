@@ -48,7 +48,7 @@ node app.js
 
 ```
 hifive-presenter  
-　　　├── LICENSE  
+　　　├── LICENSE.txt
 　　　├── package.json  
 　　　├── README.md  
 　　　├── src  
